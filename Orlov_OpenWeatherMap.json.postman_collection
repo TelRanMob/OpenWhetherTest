@@ -1,0 +1,151 @@
+{
+	"owner": "305886",
+	"lastUpdatedBy": "305886",
+	"lastRevision": 156292047,
+	"team": null,
+	"id": "c590d4c7-9373-f321-7df1-e8d109a69d5c",
+	"name": "OpenWeatherMap",
+	"description": "",
+	"remoteLink": null,
+	"order": [
+		"241dd0e6-625f-0378-5fd2-5c67989e1bb9",
+		"262a542a-7c90-003e-4b52-63b6828861de",
+		"3e02d439-805b-1778-0e76-b5fb523de7e2"
+	],
+	"requests": [
+		{
+			"id": "241dd0e6-625f-0378-5fd2-5c67989e1bb9",
+			"headers": "",
+			"url": "api.openweathermap.org/data/2.5/weather?q=london,uk",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"Status code 200\"] = responseCode.code === 200;\n\ntests[\"Response less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");\n\ntests[\"City name\"] = responseBody === \"berlin\";\n\nvar Data = responseBody.has('london');\n\npostman.setEnvironmentVariable(\"City\", Data);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1456655848559,
+			"name": "Weather in London(name,country)",
+			"description": "",
+			"collectionId": "c590d4c7-9373-f321-7df1-e8d109a69d5c"
+		},
+		{
+			"folder": null,
+			"id": "262a542a-7c90-003e-4b52-63b6828861de",
+			"name": "Weather in Berlin(name)",
+			"dataMode": "params",
+			"data": [
+				{
+					"key": "form_url",
+					"value": "http://startmeup.co.il/%d7%a6%d7%95%d7%a8-%d7%a7%d7%a9%d7%a8/",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "iphorm_4_0",
+					"value": null,
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "iphorm_4_3",
+					"value": "Ret",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "iphorm_4_4",
+					"value": "121334455",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "iphorm_4_5",
+					"value": "email@yopmail.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "iphorm_4_6",
+					"value": "ssss",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "iphorm_4_7",
+					"value": "testtest",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "iphorm_ajax",
+					"value": "1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "iphorm_id",
+					"value": "4",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "iphorm_uid",
+					"value": "{{iphormuid}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "post_id",
+					"value": "3256",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "post_title",
+					"value": "צור קשר",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "referring_url",
+					"value": "http://startmeup.co.il/",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"rawModeData": null,
+			"descriptionFormat": "html",
+			"description": "",
+			"headers": "",
+			"method": "GET",
+			"pathVariables": {},
+			"url": "api.openweathermap.org/data/2.5/weather?q=berlin",
+			"preRequestScript": "",
+			"tests": "tests[\"Status code 200\"] = responseCode.code === 200;\n\ntests[\"Response less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");\n\ntests[\"City name\"] = responseBody === \"berlin\";\n\nvar Data = responseBody.has('berlin');\n\npostman.setEnvironmentVariable(\"City\", Data);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "c590d4c7-9373-f321-7df1-e8d109a69d5c"
+		},
+		{
+			"id": "3e02d439-805b-1778-0e76-b5fb523de7e2",
+			"headers": "",
+			"url": "api.openweathermap.org/data/2.5/weather?lat=51.51&lon=-0.13",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"Status code 200\"] = responseCode.code === 200;\n\ntests[\"Response less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");\n\ntests[\"City name\"] = responseBody === \"berlin\";\n\nvar Data = responseBody.has('london');\n\npostman.setEnvironmentVariable(\"City\", Data);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1456655835623,
+			"name": "Weather in London(coordinates)",
+			"description": "",
+			"collectionId": "c590d4c7-9373-f321-7df1-e8d109a69d5c"
+		}
+	]
+}
