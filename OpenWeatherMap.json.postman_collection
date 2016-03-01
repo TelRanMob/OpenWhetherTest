@@ -1,0 +1,384 @@
+{
+	"id": "c590d4c7-9373-f321-7df1-e8d109a69d5c",
+	"name": "OpenWeatherMap",
+	"description": "",
+	"order": [
+		"241dd0e6-625f-0378-5fd2-5c67989e1bb9",
+		"3e02d439-805b-1778-0e76-b5fb523de7e2",
+		"d12a41f2-4455-3578-4df8-df45af1ebb7e"
+	],
+	"folders": [],
+	"timestamp": 1456648644796,
+	"owner": "305886",
+	"remoteLink": "",
+	"public": false,
+	"requests": [
+		{
+			"id": "241dd0e6-625f-0378-5fd2-5c67989e1bb9",
+			"headers": "Cache-Control: no-cache\nPostman-Token: 00874915-a52b-0e95-0c3f-b5e7d9d7366d\n",
+			"url": "http://api.openweathermap.org/data/2.5/weather?q=London,uk&{{AccesToken}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"Status code 200\"] = responseCode.code === 200;\ntests[\"Response less than 500ms\"] = responseTime < 500;\n\ntests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"X-Cache-Key is present\"] = postman.getResponseHeader(\"X-Cache-Key\");\n\ntests[\"Coord matches string\"] = responseBody.has(\"coord\");\ntests[\"Weather matches string\"] = responseBody.has(\"weather\");\ntests[\"Base matches string\"] = responseBody.has(\"base\");\ntests[\"Main matches string\"] = responseBody.has(\"main\");\ntests[\"Wind matches string\"] = responseBody.has(\"wind\");\ntests[\"Clouds matches string\"] = responseBody.has(\"clouds\");\ntests[\"DT matches string\"] = responseBody.has(\"dt\");\ntests[\"ID matches string\"] = responseBody.has(\"id\");\ntests[\"Name matches string\"] = responseBody.has(\"name\");\ntests[\"Cod matches string\"] = responseBody.has(\"cod\");\n\nvar data = responseBody;\nvar json = JSON.parse(data);\n\nvar cityname = json.name;\nvar countrycode = json.sys.country;\n\npostman.setEnvironmentVariable(\"City\", cityname);\npostman.setEnvironmentVariable(\"CountryCode\", countrycode);\n\nvar jsondata = JSON.parse(responseBody);\nvar parameterone = environment.City;\ntests[\"adding and receiving city name\"] = jsondata.name === parameterone;\n\nvar parametertwo = environment.CountryCode;\ntests[\"adding and receiving country code\"] = jsondata.sys.country === parametertwo;",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1456781755996,
+			"name": "Weather in London(name,country)",
+			"description": "",
+			"collectionId": "c590d4c7-9373-f321-7df1-e8d109a69d5c",
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK"
+					},
+					"time": 127,
+					"headers": [
+						{
+							"name": "Access-Control-Allow-Credentials",
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"description": ""
+						},
+						{
+							"name": "Access-Control-Allow-Methods",
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST",
+							"description": ""
+						},
+						{
+							"name": "Access-Control-Allow-Origin",
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"description": ""
+						},
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "keep-alive",
+							"description": ""
+						},
+						{
+							"name": "Content-Length",
+							"key": "Content-Length",
+							"value": "467",
+							"description": ""
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Mon, 29 Feb 2016 20:59:08 GMT",
+							"description": ""
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "openresty",
+							"description": ""
+						},
+						{
+							"name": "X-Cache-Key",
+							"key": "X-Cache-Key",
+							"value": "/data/2.5/weather?q=london,uk",
+							"description": ""
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"coord\":{\"lon\":-0.13,\"lat\":51.51},\"weather\":[{\"id\":803,\"main\":\"Clouds\",\"description\":\"broken clouds\",\"icon\":\"04n\"}],\"base\":\"cmc stations\",\"main\":{\"temp\":274.919,\"pressure\":1028.58,\"humidity\":83,\"temp_min\":274.919,\"temp_max\":274.919,\"sea_level\":1038.96,\"grnd_level\":1028.58},\"wind\":{\"speed\":3.31,\"deg\":198.502},\"clouds\":{\"all\":76},\"dt\":1456778567,\"sys\":{\"message\":0.0045,\"country\":\"GB\",\"sunrise\":1456728311,\"sunset\":1456767676},\"id\":2643743,\"name\":\"London\",\"cod\":200}",
+					"language": "javascript",
+					"rawDataType": "text",
+					"state": {
+						"size": "normal"
+					},
+					"previewType": "html",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"isSample": true,
+					"scrollToResult": true,
+					"runTests": true,
+					"id": "5b604d39-54d3-05ed-82c7-dac327608438",
+					"name": "answer",
+					"request": {
+						"url": "http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=767335c5ed5027788df500098d449e9c",
+						"headers": [
+							{
+								"key": "Cache-Control",
+								"type": "text",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"type": "text",
+								"name": "Postman-Token",
+								"value": "912e375f-5590-ff20-71b3-d8b13888ea08"
+							}
+						],
+						"data": "",
+						"method": "GET",
+						"dataMode": "params"
+					}
+				}
+			]
+		},
+		{
+			"id": "3e02d439-805b-1778-0e76-b5fb523de7e2",
+			"headers": "",
+			"url": "api.openweathermap.org/data/2.5/weather?lat=51.51&lon=-0.13&{{AccesToken}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"Status code 200\"] = responseCode.code === 200;\ntests[\"Response less than 500ms\"] = responseTime < 500;\n\ntests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"X-Cache-Key is present\"] = postman.getResponseHeader(\"X-Cache-Key\");\n\ntests[\"Coord matches string\"] = responseBody.has(\"coord\");\ntests[\"Weather matches string\"] = responseBody.has(\"weather\");\ntests[\"Base matches string\"] = responseBody.has(\"base\");\ntests[\"Main matches string\"] = responseBody.has(\"main\");\ntests[\"Wind matches string\"] = responseBody.has(\"wind\");\ntests[\"Clouds matches string\"] = responseBody.has(\"clouds\");\ntests[\"DT matches string\"] = responseBody.has(\"dt\");\ntests[\"ID matches string\"] = responseBody.has(\"id\");\ntests[\"Name matches string\"] = responseBody.has(\"name\");\ntests[\"Cod matches string\"] = responseBody.has(\"cod\");\n\nvar data = responseBody;\nvar json = JSON.parse(data);\n\nvar longitude = json.coord.lon;\npostman.setEnvironmentVariable(\"Longitude\", longitude);\nvar latitude = json.coord.lat;\npostman.setEnvironmentVariable(\"Latitude\", latitude);\nvar id = json.id;\npostman.setEnvironmentVariable(\"CityID\", id);\n\nvar jsondata = JSON.parse(responseBody);\nvar parameter = environment.CityID;\ntests[\"adding and receiving city id\"] = jsondata.id === parameter;",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1456781745011,
+			"name": "Weather in London(coordinates,id)",
+			"description": "",
+			"collectionId": "c590d4c7-9373-f321-7df1-e8d109a69d5c",
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK",
+						"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+					},
+					"time": 244,
+					"headers": [
+						{
+							"name": "Access-Control-Allow-Credentials",
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"name": "Access-Control-Allow-Methods",
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST",
+							"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+						},
+						{
+							"name": "Access-Control-Allow-Origin",
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "Content-Length",
+							"key": "Content-Length",
+							"value": "443",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Mon, 29 Feb 2016 21:12:11 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "openresty",
+							"description": "A name for the server"
+						},
+						{
+							"name": "X-Cache-Key",
+							"key": "X-Cache-Key",
+							"value": "/data/2.5/weather?lat=51.51&lon=-0.13",
+							"description": "Custom header"
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"coord\":{\"lon\":-0.13,\"lat\":51.51},\"weather\":[{\"id\":800,\"main\":\"Clear\",\"description\":\"clear sky\",\"icon\":\"01n\"}],\"base\":\"stations\",\"main\":{\"temp\":278.23,\"pressure\":1025,\"humidity\":60,\"temp_min\":277.15,\"temp_max\":279.15},\"visibility\":10000,\"wind\":{\"speed\":3.1,\"deg\":180},\"clouds\":{\"all\":0},\"dt\":1456779758,\"sys\":{\"type\":1,\"id\":5091,\"message\":0.0483,\"country\":\"GB\",\"sunrise\":1456728310,\"sunset\":1456767677},\"id\":2643743,\"name\":\"London\",\"cod\":200}",
+					"language": "javascript",
+					"rawDataType": "text",
+					"state": {
+						"size": "normal"
+					},
+					"previewType": "html",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"isSample": true,
+					"scrollToResult": true,
+					"runTests": true,
+					"id": "b4fed367-a608-f8cb-5c7e-f35f8f126b10",
+					"name": "answer",
+					"request": {
+						"url": "http://api.openweathermap.org/data/2.5/weather?lat=51.51&lon=-0.13&appid=767335c5ed5027788df500098d449e9c",
+						"headers": [
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "b0d735ea-9cc9-9d9c-a35c-cdb2a1049d18"
+							}
+						],
+						"data": "",
+						"method": "GET",
+						"dataMode": "params"
+					}
+				}
+			]
+		},
+		{
+			"id": "d12a41f2-4455-3578-4df8-df45af1ebb7e",
+			"headers": "",
+			"url": "api.openweathermap.org/data/2.5/weather?id={{CityID}}&{{AccesToken}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"Status code 200\"] = responseCode.code === 200;\ntests[\"Response less than 500ms\"] = responseTime < 500;\n\ntests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"X-Cache-Key is present\"] = postman.getResponseHeader(\"X-Cache-Key\");\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1456781789572,
+			"name": "Weather in London(by city id)",
+			"description": "",
+			"collectionId": "c590d4c7-9373-f321-7df1-e8d109a69d5c",
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK",
+						"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+					},
+					"time": 329,
+					"headers": [
+						{
+							"name": "Access-Control-Allow-Credentials",
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"name": "Access-Control-Allow-Methods",
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST",
+							"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+						},
+						{
+							"name": "Access-Control-Allow-Origin",
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "Content-Length",
+							"key": "Content-Length",
+							"value": "466",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Mon, 29 Feb 2016 21:35:10 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "openresty",
+							"description": "A name for the server"
+						},
+						{
+							"name": "X-Cache-Key",
+							"key": "X-Cache-Key",
+							"value": "/data/2.5/weather?id=2643743",
+							"description": "Custom header"
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"coord\":{\"lon\":-0.13,\"lat\":51.51},\"weather\":[{\"id\":803,\"main\":\"Clouds\",\"description\":\"broken clouds\",\"icon\":\"04n\"}],\"base\":\"cmc stations\",\"main\":{\"temp\":274.919,\"pressure\":1028.58,\"humidity\":83,\"temp_min\":274.919,\"temp_max\":274.919,\"sea_level\":1038.96,\"grnd_level\":1028.58},\"wind\":{\"speed\":3.31,\"deg\":198.502},\"clouds\":{\"all\":76},\"dt\":1456780971,\"sys\":{\"message\":0.012,\"country\":\"GB\",\"sunrise\":1456728308,\"sunset\":1456767678},\"id\":2643743,\"name\":\"London\",\"cod\":200}",
+					"language": "javascript",
+					"rawDataType": "text",
+					"state": {
+						"size": "normal"
+					},
+					"previewType": "html",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"isSample": true,
+					"scrollToResult": true,
+					"runTests": true,
+					"id": "d4fd69d6-cc88-9524-45bd-2b07b163eb32",
+					"name": "answer",
+					"request": {
+						"url": "http://api.openweathermap.org/data/2.5/weather?id=2643743&appid=767335c5ed5027788df500098d449e9c",
+						"headers": [
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "33f9f9a4-3f97-03f0-59d0-561585572443"
+							}
+						],
+						"data": "",
+						"method": "GET",
+						"dataMode": "params"
+					}
+				}
+			]
+		}
+	]
+}
