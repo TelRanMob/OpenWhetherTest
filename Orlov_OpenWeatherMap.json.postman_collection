@@ -1,0 +1,177 @@
+{
+	"id": "c590d4c7-9373-f321-7df1-e8d109a69d5c",
+	"name": "Orlov_OpenWeatherMap",
+	"description": "",
+	"order": [
+		"241dd0e6-625f-0378-5fd2-5c67989e1bb9",
+		"d12a41f2-4455-3578-4df8-df45af1ebb7e",
+		"3e02d439-805b-1778-0e76-b5fb523de7e2"
+	],
+	"folders": [],
+	"timestamp": 1456648644796,
+	"owner": "305886",
+	"remoteLink": "",
+	"public": false,
+	"requests": [
+		{
+			"id": "241dd0e6-625f-0378-5fd2-5c67989e1bb9",
+			"headers": "Cache-Control: no-cache\nPostman-Token: 00874915-a52b-0e95-0c3f-b5e7d9d7366d\n",
+			"url": "{{URL}}/data/2.5/weather?q=London,uk&appid={{AccesToken}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"Status code 200\"] = responseCode.code === 200;\ntests[\"Response less than 500ms\"] = responseTime < 500;\ntests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"X-Cache-Key is present\"] = postman.getResponseHeader(\"X-Cache-Key\");\n\nvar data = JSON.parse(responseBody);\n\ntests[\"Body answer full\"] = data.hasOwnProperty('coord') && data.hasOwnProperty('weather') \n&& data.hasOwnProperty('base') && data.hasOwnProperty('main') && data.hasOwnProperty('wind') \n&& data.hasOwnProperty('clouds') && data.hasOwnProperty('dt') && data.hasOwnProperty('sys')\n&& data.hasOwnProperty('id') && data.hasOwnProperty('name') && data.hasOwnProperty('cod');\n\npostman.setEnvironmentVariable(\"City\", data.name);\npostman.setEnvironmentVariable(\"CountryCode\", data.sys.country);\npostman.setEnvironmentVariable(\"CityID\", data.id);\n\ntests[\"City name\"] = data.name === environment.City;\ntests[\"Country code\"] = data.sys.country === environment.CountryCode;\n\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1456952183518,
+			"name": "Weather in London( by name and country)",
+			"description": "",
+			"collectionId": "c590d4c7-9373-f321-7df1-e8d109a69d5c",
+			"responses": []
+		},
+		{
+			"id": "3e02d439-805b-1778-0e76-b5fb523de7e2",
+			"headers": "",
+			"url": "{{URL}}/data/2.5/weather?lat={{Latitude}}&lon={{Longitude}}&appid={{AccesToken}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"Status code 200\"] = responseCode.code === 200;\ntests[\"Response less than 500ms\"] = responseTime < 500;\ntests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"X-Cache-Key is present\"] = postman.getResponseHeader(\"X-Cache-Key\");\n\nvar data = JSON.parse(responseBody);\n\ntests[\"Body answer full\"] = data.hasOwnProperty('coord') && data.hasOwnProperty('weather') \n&& data.hasOwnProperty('base') && data.hasOwnProperty('main') && data.hasOwnProperty('wind') \n&& data.hasOwnProperty('clouds') && data.hasOwnProperty('dt') && data.hasOwnProperty('sys')\n&& data.hasOwnProperty('id') && data.hasOwnProperty('name') && data.hasOwnProperty('cod');\n\ntests[\"City name\"] = data.name === environment.City;\ntests[\"Country code\"] = data.sys.country === environment.CountryCode;\ntests[\"City id\"] = data.id === parseInt(environment.CityID);\ntests[\"Coordinates.longitude\"] = data.coord.lon === parseFloat(environment.Longitude);\ntests[\"Coordinates.latitude\"] = data.coord.lat === parseFloat(environment.Latitude);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1456952543451,
+			"name": "Weather in London(by coordinates)",
+			"description": "",
+			"collectionId": "c590d4c7-9373-f321-7df1-e8d109a69d5c",
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK",
+						"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+					},
+					"time": 244,
+					"headers": [
+						{
+							"name": "Access-Control-Allow-Credentials",
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"name": "Access-Control-Allow-Methods",
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST",
+							"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+						},
+						{
+							"name": "Access-Control-Allow-Origin",
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "Content-Length",
+							"key": "Content-Length",
+							"value": "443",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Mon, 29 Feb 2016 21:12:11 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "openresty",
+							"description": "A name for the server"
+						},
+						{
+							"name": "X-Cache-Key",
+							"key": "X-Cache-Key",
+							"value": "/data/2.5/weather?lat=51.51&lon=-0.13",
+							"description": "Custom header"
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"coord\":{\"lon\":-0.13,\"lat\":51.51},\"weather\":[{\"id\":800,\"main\":\"Clear\",\"description\":\"clear sky\",\"icon\":\"01n\"}],\"base\":\"stations\",\"main\":{\"temp\":278.23,\"pressure\":1025,\"humidity\":60,\"temp_min\":277.15,\"temp_max\":279.15},\"visibility\":10000,\"wind\":{\"speed\":3.1,\"deg\":180},\"clouds\":{\"all\":0},\"dt\":1456779758,\"sys\":{\"type\":1,\"id\":5091,\"message\":0.0483,\"country\":\"GB\",\"sunrise\":1456728310,\"sunset\":1456767677},\"id\":2643743,\"name\":\"London\",\"cod\":200}",
+					"language": "javascript",
+					"rawDataType": "text",
+					"state": {
+						"size": "normal"
+					},
+					"previewType": "html",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"isSample": true,
+					"scrollToResult": true,
+					"runTests": true,
+					"id": "b4fed367-a608-f8cb-5c7e-f35f8f126b10",
+					"name": "answer",
+					"request": {
+						"url": "http://api.openweathermap.org/data/2.5/weather?lat=51.51&lon=-0.13&appid=767335c5ed5027788df500098d449e9c",
+						"headers": [
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "b0d735ea-9cc9-9d9c-a35c-cdb2a1049d18"
+							}
+						],
+						"data": "",
+						"method": "GET",
+						"dataMode": "params"
+					}
+				}
+			]
+		},
+		{
+			"id": "d12a41f2-4455-3578-4df8-df45af1ebb7e",
+			"headers": "",
+			"url": "{{URL}}/data/2.5/weather?id={{CityID}}&appid={{AccesToken}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"Status code 200\"] = responseCode.code === 200;\ntests[\"Response less than 500ms\"] = responseTime < 500;\ntests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"X-Cache-Key is present\"] = postman.getResponseHeader(\"X-Cache-Key\");\n\nvar data = JSON.parse(responseBody);\n\ntests[\"Body answer full\"] = data.hasOwnProperty('coord') && data.hasOwnProperty('weather') \n&& data.hasOwnProperty('base') && data.hasOwnProperty('main') && data.hasOwnProperty('wind') \n&& data.hasOwnProperty('clouds') && data.hasOwnProperty('dt') && data.hasOwnProperty('sys')\n&& data.hasOwnProperty('id') && data.hasOwnProperty('name') && data.hasOwnProperty('cod');\n\npostman.setEnvironmentVariable(\"Longitude\", data.coord.lon);\npostman.setEnvironmentVariable(\"Latitude\", data.coord.lat);\n\ntests[\"City id\"] = data.id === parseFloat(environment.CityID);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1456952266821,
+			"name": "Weather in London(by city id)",
+			"description": "",
+			"collectionId": "c590d4c7-9373-f321-7df1-e8d109a69d5c",
+			"responses": []
+		}
+	]
+}
