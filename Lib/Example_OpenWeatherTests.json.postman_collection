@@ -1,0 +1,54 @@
+{
+	"id": "8f31148d-a9fb-f181-1163-ecfb437040e9",
+	"name": "Example_OpenWeatherTests",
+	"description": "",
+	"order": [
+		"3b36c9d2-e08b-493b-4585-bfb0f0c0e405",
+		"452f31f6-4058-438e-98bc-4cf9d30329a9"
+	],
+	"folders": [],
+	"timestamp": 1457295591109,
+	"owner": "46674",
+	"remoteLink": "",
+	"public": false,
+	"requests": [
+		{
+			"id": "3b36c9d2-e08b-493b-4585-bfb0f0c0e405",
+			"headers": "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\nUpgrade-Insecure-Requests: 1\nUser-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36\nReferer: http://startmeup.co.il/\nAccept-Encoding: gzip, deflate, sdch\nAccept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4\nCookie: PHPSESSID=qmgd1rrd0hgl50gb906cj2vvq1; _ga=GA1.3.926825356.1455869575; _gat=1\nCache-Control: no-cache\nPostman-Token: cb8c43c7-38b4-f662-99b5-d3259961d092\n",
+			"url": "http://api.openweathermap.org/data/2.5/weather?q={{City}}&appid=44db6a862fba0b067b1930da0d769e98",
+			"preRequestScript": "//Choose randomly on of the cities from array\n\nvar cities = [\"Moscow\",\"Tel-Aviv\",\"London\",\"Paris\"];\n\nfunction getRandomInt(min, max) {\n    return Math.floor(Math.random() * (max - min + 1)) + min;\n}\n\nvar _i = getRandomInt(0,3); \n\npostman.setEnvironmentVariable(\"City\",cities[_i]);",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\ntests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"X-Cache-Key is present\"] = postman.getResponseHeader(\"X-Cache-Key\");\n\ntests[\"Response time is less than 500ms\"] = responseTime < 500;\n\nvar jsonData = JSON.parse(responseBody);\n\ntests[\"lon is present\"] = jsonData.coord.hasOwnProperty(\"lon\");\ntests[\"lat is present\"] = jsonData.coord.hasOwnProperty(\"lat\");\ntests[\"id is present\"] = jsonData.weather[0].hasOwnProperty(\"id\");\ntests[\"main is present\"] = jsonData.weather[0].hasOwnProperty(\"main\");\ntests[\"description is present\"] = jsonData.weather[0].hasOwnProperty(\"description\");\ntests[\"icon is present\"] = jsonData.weather[0].hasOwnProperty(\"icon\");\ntests[\"base is present\"] = jsonData.hasOwnProperty(\"base\");\ntests[\"temp is present\"] = jsonData.main.hasOwnProperty(\"temp\");\ntests[\"pressuret is present\"] = jsonData.main.hasOwnProperty(\"pressure\");\ntests[\"humidity is present\"] = jsonData.main.hasOwnProperty(\"humidity\");\ntests[\"temp_min is present\"] = jsonData.main.hasOwnProperty(\"temp_min\");\ntests[\"temp_max is present\"] = jsonData.main.hasOwnProperty(\"temp_max\");\ntests[\"sea_level is present\"] = jsonData.main.hasOwnProperty(\"sea_level\");\ntests[\"grnd_level is present\"] = jsonData.main.hasOwnProperty(\"grnd_level\");\ntests[\"speed is present\"] = jsonData.wind.hasOwnProperty(\"speed\");\ntests[\"deg is present\"] = jsonData.wind.hasOwnProperty(\"deg\");\ntests[\"all is present\"] = jsonData.clouds.hasOwnProperty(\"all\");\n\nif (responseBody.has(\"rain\")){\ntests[\"rain is present\"] = jsonData.rain.hasOwnProperty(\"3h\");\n}\nif (responseBody.has(\"snow\")){\ntests[\"snow is present\"] = jsonData.snow.hasOwnProperty(\"3h\");\n}\ntests[\"dt is present\"] = jsonData.hasOwnProperty(\"dt\");\nif (responseBody.has(\"type\")){\ntests[\"type is present\"] = jsonData.sys.hasOwnProperty(\"type\");\n}\ntests[\"id is present\"] = jsonData.sys.hasOwnProperty(\"id\");\ntests[\"message is present\"] = jsonData.sys.hasOwnProperty(\"message\");\ntests[\"country is present\"] = jsonData.sys.hasOwnProperty(\"country\");\ntests[\"sunrise is present\"] = jsonData.sys.hasOwnProperty(\"sunrise\");\ntests[\"sunset is present\"] = jsonData.sys.hasOwnProperty(\"sunset\");\ntests[\"id is present\"] = jsonData.hasOwnProperty(\"id\");\ntests[\"cod is present\"] = jsonData.hasOwnProperty(\"cod\");\ntests[\"name is present\"] = jsonData.hasOwnProperty(\"name\");\n\n\npostman.setEnvironmentVariable(\"longitude\",jsonData.coord.lon);\npostman.setEnvironmentVariable(\"latitude\",jsonData.coord.lat);\npostman.setEnvironmentVariable(\"CountryCod\",jsonData.sys.country);\npostman.setEnvironmentVariable(\"CityID\",jsonData.id);\n\ntests[\"City name is coorect\"] = jsonData.name === environment.City;\ntests[\"longitude is coorect\"] = jsonData.coord.lon === parseFloat(environment.longitude);\ntests[\"latitude is coorect\"] = jsonData.coord.lat === parseFloat(environment.latitude);\ntests[\"CountryCod is coorect\"] = jsonData.sys.country === environment.CountryCod;\ntests[\"CityID is coorect\"] = jsonData.id === parseInt(environment.CityID);\n\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1457456487554,
+			"name": "By CityName",
+			"description": "",
+			"collectionId": "8f31148d-a9fb-f181-1163-ecfb437040e9",
+			"responses": []
+		},
+		{
+			"id": "452f31f6-4058-438e-98bc-4cf9d30329a9",
+			"headers": "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\nUpgrade-Insecure-Requests: 1\nUser-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36\nReferer: http://startmeup.co.il/\nAccept-Encoding: gzip, deflate, sdch\nAccept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4\nCookie: PHPSESSID=qmgd1rrd0hgl50gb906cj2vvq1; _ga=GA1.3.926825356.1455869575; _gat=1\nCache-Control: no-cache\nPostman-Token: cb8c43c7-38b4-f662-99b5-d3259961d092\n",
+			"url": "http://api.openweathermap.org/data/2.5/weather?q={{City}}&appid=44db6a862fba0b067b1930da0d769e98",
+			"preRequestScript": "//Choose  one of the cities from array every new iteration\n\nvar cities = [\"Moscow\",\"Tel-Aviv\",\"London\",\"Paris\"];\n\n\n\nvar _i = parseInt(environment.CityIndex);\n\npostman.setEnvironmentVariable(\"City\",cities[_i]);\n\nif (_i < cities.length){_i++}\nelse _i = 0;\n\npostman.setEnvironmentVariable(\"CityIndex\",_i);\n\n\n",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\ntests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"X-Cache-Key is present\"] = postman.getResponseHeader(\"X-Cache-Key\");\n\ntests[\"Response time is less than 500ms\"] = responseTime < 500;\n\nvar jsonData = JSON.parse(responseBody);\n\ntests[\"lon is present\"] = jsonData.coord.hasOwnProperty(\"lon\");\ntests[\"lat is present\"] = jsonData.coord.hasOwnProperty(\"lat\");\ntests[\"id is present\"] = jsonData.weather[0].hasOwnProperty(\"id\");\ntests[\"main is present\"] = jsonData.weather[0].hasOwnProperty(\"main\");\ntests[\"description is present\"] = jsonData.weather[0].hasOwnProperty(\"description\");\ntests[\"icon is present\"] = jsonData.weather[0].hasOwnProperty(\"icon\");\ntests[\"base is present\"] = jsonData.hasOwnProperty(\"base\");\ntests[\"temp is present\"] = jsonData.main.hasOwnProperty(\"temp\");\ntests[\"pressuret is present\"] = jsonData.main.hasOwnProperty(\"pressure\");\ntests[\"humidity is present\"] = jsonData.main.hasOwnProperty(\"humidity\");\ntests[\"temp_min is present\"] = jsonData.main.hasOwnProperty(\"temp_min\");\ntests[\"temp_max is present\"] = jsonData.main.hasOwnProperty(\"temp_max\");\ntests[\"sea_level is present\"] = jsonData.main.hasOwnProperty(\"sea_level\");\ntests[\"grnd_level is present\"] = jsonData.main.hasOwnProperty(\"grnd_level\");\ntests[\"speed is present\"] = jsonData.wind.hasOwnProperty(\"speed\");\ntests[\"deg is present\"] = jsonData.wind.hasOwnProperty(\"deg\");\ntests[\"all is present\"] = jsonData.clouds.hasOwnProperty(\"all\");\n\nif (responseBody.has(\"rain\")){\ntests[\"rain is present\"] = jsonData.rain.hasOwnProperty(\"3h\");\n}\nif (responseBody.has(\"snow\")){\ntests[\"snow is present\"] = jsonData.snow.hasOwnProperty(\"3h\");\n}\ntests[\"dt is present\"] = jsonData.hasOwnProperty(\"dt\");\nif (responseBody.has(\"type\")){\ntests[\"type is present\"] = jsonData.sys.hasOwnProperty(\"type\");\n}\ntests[\"id is present\"] = jsonData.sys.hasOwnProperty(\"id\");\ntests[\"message is present\"] = jsonData.sys.hasOwnProperty(\"message\");\ntests[\"country is present\"] = jsonData.sys.hasOwnProperty(\"country\");\ntests[\"sunrise is present\"] = jsonData.sys.hasOwnProperty(\"sunrise\");\ntests[\"sunset is present\"] = jsonData.sys.hasOwnProperty(\"sunset\");\ntests[\"id is present\"] = jsonData.hasOwnProperty(\"id\");\ntests[\"cod is present\"] = jsonData.hasOwnProperty(\"cod\");\ntests[\"name is present\"] = jsonData.hasOwnProperty(\"name\");\n\n\npostman.setEnvironmentVariable(\"longitude\",jsonData.coord.lon);\npostman.setEnvironmentVariable(\"latitude\",jsonData.coord.lat);\npostman.setEnvironmentVariable(\"CountryCod\",jsonData.sys.country);\npostman.setEnvironmentVariable(\"CityID\",jsonData.id);\n\ntests[\"City name is coorect\"] = jsonData.name === environment.City;\ntests[\"longitude is coorect\"] = jsonData.coord.lon === parseFloat(environment.longitude);\ntests[\"latitude is coorect\"] = jsonData.coord.lat === parseFloat(environment.latitude);\ntests[\"CountryCod is coorect\"] = jsonData.sys.country === environment.CountryCod;\ntests[\"CityID is coorect\"] = jsonData.id === parseInt(environment.CityID);\n\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1457458694633,
+			"name": "By CityName2",
+			"description": "Using prerequest script, that take a new city for every teat iteration",
+			"collectionId": "8f31148d-a9fb-f181-1163-ecfb437040e9",
+			"responses": []
+		}
+	]
+}
